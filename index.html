@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Math Puzzle Game</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <title>Math Quiz</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin: 20px; }
+    .quiz-box { padding: 20px; border: 2px solid black; width: 300px; margin: auto; }
+    button { margin: 10px; padding: 10px; cursor: pointer; }
+  </style>
 </head>
 <body>
-  <div id="header">
-    <div id="coins">💰 0</div>
-    <div id="timer">⏱️ 00:00</div>
-    <div id="level">Level 1</div>
+  <h1>Math Quiz</h1>
+  <div class="quiz-box">
+    <p id="question"></p>
+    <input type="number" id="answer" placeholder="Your answer">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="result"></p>
   </div>
 
-  <div id="puzzle"></div>
-  <div id="numbers"></div>
-  <div id="message"></div>
+  <script>
+    let num1 = Math.floor(Math.random() * 10);
+    let num2 = Math.floor(Math.random() * 10);
+    document.getElementById("question").innerText = `What is ${num1} + ${num2}?`;
 
-  <script src="script.js"></script>
+    function checkAnswer() {
+      let userAnswer = document.getElementById("answer").value;
+      if (parseInt(userAnswer) === num1 + num2) {
+        document.getElementById("result").innerText = "✅ Correct!";
+      } else {
+        document.getElementById("result").innerText = "❌ Wrong, try again.";
+      }
+    }
+  </script>
 </body>
 </html>
