@@ -29,7 +29,8 @@ function loadLevel() {
   puzzleDiv.innerHTML = "";
 
   let grid = levels[levelIndex].grid;
-  let answersCopy = [...levels[levelIndex].answers]; // copy answers
+  let answers = levels[levelIndex].answers; // don't modify original
+  let answerIndex = 0;
 
   grid.forEach(row => {
     let rowDiv = document.createElement("div");
@@ -40,8 +41,8 @@ function loadLevel() {
 
       if (cell === "") {
         div.classList.add("empty");
-        let answer = answersCopy.shift();
-        div.dataset.answer = answer;
+        div.dataset.answer = answers[answerIndex]; // assign from array
+        answerIndex++;
         div.ondragover = ev => ev.preventDefault();
         div.ondrop = ev => drop(ev, div);
       } else {
@@ -56,7 +57,7 @@ function loadLevel() {
   // Numbers to drag
   let numsDiv = document.getElementById("numbers");
   numsDiv.innerHTML = "";
-  levels[levelIndex].answers.forEach(num => {
+  answers.forEach(num => {
     let span = document.createElement("span");
     span.className = "number";
     span.innerText = num;
